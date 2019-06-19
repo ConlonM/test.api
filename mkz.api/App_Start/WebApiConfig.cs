@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web.Http;
-
+using System.Web.Http.Cors;
 namespace mkz.api
 {
     public static class WebApiConfig
@@ -11,12 +11,14 @@ namespace mkz.api
         public static void Register(HttpConfiguration config)
         {
             // Web API 配置和服务
-            //config.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new DisableJsonConverter());
-            //config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = ShouldSerializeContractResolver.Instance;
-            //config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
-            
+
+
             // Web API 路由
-           // config.MapHttpAttributeRoutes();
+            // config.MapHttpAttributeRoutes();
+
+
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

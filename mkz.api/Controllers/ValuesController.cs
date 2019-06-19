@@ -20,6 +20,7 @@ namespace mkz.api.Controllers
 
             public int Age { get; set; }
         }
+        [Authorize]
         // GET api/values/5
         public User Get(int id)
         {
