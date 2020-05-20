@@ -18,7 +18,7 @@ namespace mkz.api.Controllers
         {
             public string Name { get; set; }
 
-            public int Age { get; set; }
+            public int ID { get; set; }
         }
        // [Authorize]
         // GET api/values/5
@@ -26,13 +26,54 @@ namespace mkz.api.Controllers
         {
             return new User() {
                 Name = "蒙康正",
-                Age = 30
+                ID = 30
             };
+        }
+
+        public class PagesUser
+        {
+            public int PageIndex;
+            public int PageSize;
+            public bool HasNextPage;
+            public List<User> List;
+        }
+
+        public PagesUser GetUsers(int pageIndex,int pageSize)
+        {
+            PagesUser page = new PagesUser();
+            page.List = new List<User>();
+            if (pageIndex <=5)
+            {
+                for (int i = (pageIndex-1)*pageSize; i < pageIndex * pageSize; i++)
+                {
+                    var item = new User()
+                    {
+                        Name = "综合受理窗口" + i,
+                        ID = i
+                    };
+                    page.List.Add(item);
+                }
+
+                if(pageIndex == 5)
+                {
+                    page.HasNextPage = false;
+                }
+                else
+                {
+                    page.HasNextPage = true;
+                }
+            }  
+
+
+
+            return page;
         }
 
         // POST api/values
         public void Post([FromBody]string value)
         {
+
+            //dev branch
         }
 
         // PUT api/values/5
